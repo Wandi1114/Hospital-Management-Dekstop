@@ -14,24 +14,16 @@ class pendaftaran_poli:
         self.__waktu = dt.strftime("%I:%M %p")
 
     def getWaktu(self):
-        return "Waktu : {}".format(self.__waktu)
+        return self.__waktu
 
     def setTanggal(self):
         self.__tanggal = dt.strftime("%Y/%m/%d")
 
     def getTanggal(self):
-        return "Tanggal : {}". format(self.__tanggal)
+        return self.__tanggal
 
     def setKeluhan(self, keluhan):
         self.__keluhan = keluhan
 
     def getKeluhan(self):
         return self.__keluhan
-
-
-#poli = Poli()
-daftarp = pendaftaran_poli()
-daftarp.setWaktu()
-daftarp.setTanggal()
-print(daftarp.getWaktu())
-print(daftarp.getTanggal())
