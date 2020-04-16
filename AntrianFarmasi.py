@@ -1,5 +1,5 @@
-#from Pasien import Pasien
-#from Dokter import Dokter
+from Pasien import Pasien
+from Dokter import Dokter
 class AntrianFarmasi:
 
     __JumlahAntrian = 0
@@ -20,13 +20,3 @@ class AntrianFarmasi:
 
     def getNama_Pasien(self):
         return  self.__NamaPasien
-
-
-wandi=AntrianFarmasi()
-thamrin=AntrianFarmasi()
-Ody=AntrianFarmasi()
-Sarah=AntrianFarmasi()
-
-print(wandi.GetNomor_Antrian())
-wandi.SetNomor_Antrian(7)
-print(wandi.GetNomor_Antrian())
