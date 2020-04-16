@@ -1,31 +1,38 @@
 class Dokter:
 
     def __init__(self,ID_Dokter,Nama_Dokter,JadwalDokter,Spesialis,NoSerialDokter):
-       self.ID_Dokter = ID_Dokter
-       self.Nama_Dokter = Nama_Dokter
-       self.JadwalDokter = JadwalDokter
-       self.Spesialis = Spesialis
-       self.NoSerialDokter = NoSerialDokter
+       self.__ID_Dokter = ID_Dokter
+       self.__Nama_Dokter = Nama_Dokter
+       self.__JadwalDokter = JadwalDokter
+       self.__Spesialis = Spesialis
+       self.__NoSerialDokter = NoSerialDokter
 
     def getID_Dokter(self):
-        return "Dokter: {}".format(self.ID_Dokter)
+        return self.__ID_Dokter
+    
+    def setID_Dokter(self,id):
+        self.__ID_Dokter = id
 
     def getNama_Dokter(self):
-        return "Nama: {}".format(self.Nama_Dokter)
+        return self.__Nama_Dokter
+
+    def setNama_Dokter(self,nm):
+        self.__Nama_Dokter = nm
 
     def getJadwalDokter(self):
-        return   "Jadwal: {}".format(self.JadwalDokter)
+        return self.__JadwalDokter
+
+    def setJadwal_Dokter(self,jdw):
+        self.__Jadwal_Dokter = jdw
 
     def getSpesialis(self):
-        return   "Spesialis: {}".format(self.Spesialis)
+        return self.__Spesialis
+
+    def setSpesialis(self,spesial):
+        self.__Spesialis = spesial
 
     def getNoSerialDokter(self):
-        return   "Serial: {}".format(self.NoSerialDokter)
+        return self.NoSerialDokter
 
-
-Audy = Dokter(21,"Audy","Senin","Gigi",2105)
-print(Audy.getID_Dokter())
-print(Audy.getNama_Dokter())
-print(Audy.getJadwalDokter())
-print(Audy.getSpesialis())
-print(Audy.getNoSerialDokter())
+    def setNoSerialDokter(self,nsd):
+        self.__NoSerialDokter = nsd
