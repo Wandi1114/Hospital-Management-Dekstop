@@ -8,26 +8,26 @@ class RekamKesehatanElektronik:
         self.__Daftar_RKE= []
         self.__Diagnosa = []
 
-@property
-    def Diagnosa(self):
-        return self.__Diagnosa    
-    @Diagnosa.setter
-    def Diagnosa(self, Diagnosa=[]):
-        self.__Diagnosa = []
+    @property
+    def Dokter(self):
+        return self.__Dokter    
+    @Dokter.setter
+    def Dokter(self, Dokter):
+        self.__Dokter = Dokter
 
-@property
+    @property
     def Daftar_RKE(self):
         return self.__Daftar_RKE    
     @Daftar_RKE.setter
     def Daftar_RKE(self, Daftar_RKE=[]):
-        self.__Daftar_RKE = []
+        self.__Daftar_RKE = Daftar_RKE
 
-  @property
-    def Diagnosa(self):
+    @property
+    def Dokter(self):
         return self.__Diagnosa    
     @Diagnosa.setter
     def Diagnosa(self, Diagnosa=[]):
-        self.__Diagnosa = []
+        self.__Diagnosa = Diagnosa
 
     def __str__(self):
         return "Dokter : {} \n  Daftar_RKE : {}\n Diagnosa : {}".format(self.Dokter,self.Daftar_RKE,self.Diagnosa)
