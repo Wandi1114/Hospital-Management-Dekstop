@@ -4,9 +4,9 @@ import datetime
 
 class RekamMedisElektronik:
 
-    def __init__(self, ID, Diagnosa, Tgl_konsultasi, Riwayat_obat):
+    def __init__(self, ID, Diagnosa=[], Tgl_konsultasi, Riwayat_obat):
         self.__ID_Dokter = ID
-        self.__Diagnosa = []
+        self.__Diagnosa = Diagnosa
         self.__Tanggal_konsultasi = Tgl_konsultasi
         self.__Riwayat_Obat = []
 
@@ -22,7 +22,7 @@ class RekamMedisElektronik:
         return self.__Diagnosa    
     @Diagnosa.setter
     def Diagnosa(self, Diagnosa=[]):
-        self.__Diagnosa = []
+        self.__Diagnosa = Diagnosa
 
     @property
     def Tanggal_konsultasi(self):
@@ -37,7 +37,7 @@ class RekamMedisElektronik:
     def Riwayat_obat(self):
         return self.__Riwayat_Obat
     @Riwayat_obat.setter
-    def Riwayat_obat(self, Riwayat_Obat[]):
+    def Riwayat_obat(self, Riwayat_Obat=[]):
         self.__Riwayat_obat = []
 
     def __str__(self):
