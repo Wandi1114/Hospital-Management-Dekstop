@@ -1,10 +1,11 @@
+#from Klinik import Klinik
 import datetime
 class Pasien:
     JumlahPasien = 0
     def __init__(self,Nama):
         Pasien.JumlahPasien += 1
         self.__Nama_Lengkap = Nama
-        self.__Tanggal_Lahir = "0000/00/00"
+        self.__Tanggal_Lahir = "00/00/0000"
         self.__Umur = 0
         self.__NIK = "000"
         self.__Alamat = ""
@@ -17,7 +18,7 @@ class Pasien:
     
     def getID_Pasien(self):
         return self.__ID_Pasien
-
+    
     def setID_Pasien(self, id):
         self.__ID_Pasien = id
 
@@ -33,13 +34,14 @@ class Pasien:
     def setTanggal_Lahir(self,tl):
         self.__Tanggal_Lahir = tl
     
-    def getUmur(self):
+    @property
+    def Umur(self):
         self.setUmur()
         return self.__Umur
-
+    
     def setUmur(self):
-        tgl = self.getTanggal_Lahir.split('/')
-        self.__Umur = datetime.date.today().year - int(tgl[0])
+        tgl = self.getTanggal_Lahir().split('/')
+        self.__Umur = datetime.date.today().year - int(tgl[2])
     
     def getNIK(self):
         return self.__NIK
@@ -58,6 +60,8 @@ class Pasien:
 
     def setJenis_Kelamin(self,jk):
         self.__Jenis_Kelamin = jk
-    
-    def Antri(self):
-        pass
+wandi=Pasien("Wandi")
+wandi.setTanggal_Lahir("02/05/2000")
+x=wandi.getTanggal_Lahir().split("/")
+
+print(wandi.Umur)
