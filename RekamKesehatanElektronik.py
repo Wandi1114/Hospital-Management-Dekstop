@@ -1,33 +1,39 @@
-#from Pasien import Pasien
-#from Dokter import Dokter
+from Pasien import Pasien
+from Dokter import Dokter
+import datetime
 
 class RekamKesehatanElektronik:
 
     def __init__(self, Dokter, Daftar_RKE, Diagnosa):
-        self.__Dokter= []
-        self.__Daftar_RKE= []
-        self.__Diagnosa = []
+        self.__XDokter= []
+        self.__Daftar_RK= []
+        self.__Diagnosa_Kesehatan = []
+        self.__Riwayat_Penyakit = Pasien.getRiwayat_Penyakit
+        self.Pasien=Pasien
 
-    @property
-    def Dokter(self):
-        return self.__Dokter    
-    @Dokter.setter
-    def Dokter(self, Dokter):
-        self.__Dokter = Dokter
+    def getXDokter (self) :
+        return self.__XDokter
+    def addXDokter (self,XD):
+        self.__XDokter.append(XD)
+    def delXDokter (self,XD):
+        self.__XDokter.del(XD)
+    
+    def getDaftar_RK (self) :
+        return self.__Daftar_RK
+    def addDaftar_RK (self,DRK):
+        self.__Daftar_RK.append(DRK)
+    def delDaftar_RK (self,DRK):
+        self.__Daftar_RK.del(DRK)
 
-    @property
-    def Daftar_RKE(self):
-        return self.__Daftar_RKE    
-    @Daftar_RKE.setter
-    def Daftar_RKE(self, Daftar_RKE=[]):
-        self.__Daftar_RKE = Daftar_RKE
+    def getDiagnosa_Kesehatan (self,XDokter) :
+        return self.__Diagnosa.XDokter
+    def addDiagnosa (self,Diag,Tgl,ID_Dokter):
+        self.Diag = Tgl (dt,strftime),ID_Dokter.getID_Dokter
+        self.__Diagnosa.append(Diag)
+    def delDiagnosa (self,Diag):
+        self.__Diagnosa.del(Diag)
 
-    @property
-    def Dokter(self):
-        return self.__Diagnosa    
-    @Diagnosa.setter
-    def Diagnosa(self, Diagnosa=[]):
-        self.__Diagnosa = Diagnosa
-
-    def __str__(self):
-        return "Dokter : {} \n  Daftar_RKE : {}\n Diagnosa : {}".format(self.Dokter,self.Daftar_RKE,self.Diagnosa)
+    def getRiwayat_Penyakit (self):
+        return self.Pasien.getRiwayat_Penyakit
+    def setRiwayat_Penyakit (self,DRK):
+        self.__Riwayat_Penyakit = RiwPe
