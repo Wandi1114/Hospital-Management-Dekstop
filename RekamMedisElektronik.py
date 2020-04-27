@@ -1,44 +1,34 @@
-#from Pasien import Pasien
-#from Dokter import Dokter
+from Pasien import Pasien
+from Dokter import Dokter
 import datetime
 
 class RekamMedisElektronik:
 
-    def __init__(self, ID, Diagnosa=[], Tgl_konsultasi, Riwayat_obat):
-        self.__ID_Dokter = ID
-        self.__Diagnosa = Diagnosa
-        self.__Tanggal_konsultasi = Tgl_konsultasi
+    def __init__(self, Pasien):
+        self.Dokter = dokter.getID_Dokter()
+        self.__Diagnosa = []
+        self.__Tanggal_konsultasi = dokter.getTgl_konsultasi()
         self.__Riwayat_Obat = []
+        self.Pasien = Pasien
 
-    @property
-    def ID_Dokter(self):
-        return self.__ID_Dokter
-    @ID_Dokter.setter
-    def ID_Dokter(self, ID):
-        self.__ID_Dokter = ID
+    def getID_Dokter (self):
+        return self.Dokter.getID_Dokter()
 
-    @property
-    def Diagnosa(self):
-        return self.__Diagnosa    
-    @Diagnosa.setter
-    def Diagnosa(self, Diagnosa=[]):
-        self.__Diagnosa = Diagnosa
+    def getDiagnosa (self) :
+        return self.__Diagnosa
+    def addDiagnosa (self,Diag):
+        self.__Diagnosa.append(Diag)
+    def delDiagnosa (self,Diag):
+        self.__Diagnosa.del(Diag)
 
-    @property
-    def Tanggal_konsultasi(self):
-        Tanggal_konsultasi.datetime.date
-        return self.__Tanggal_konsultasi
-    @Tanggal_konsultasi.setter
-    def Tanggal_konsultasi(self, Tgl_konsultasi):
-        self.__Tanggal_konsultasi = Tgl_konsultasi
-
-
-    @property
-    def Riwayat_obat(self):
+    def getRiwayat_Obat (self) :
         return self.__Riwayat_Obat
-    @Riwayat_obat.setter
-    def Riwayat_obat(self, Riwayat_Obat=[]):
-        self.__Riwayat_obat = []
+    def addRiwayat_Obat (self,RO):
+        self.__Riwayat_Obat.append(RO)
+    def delRiwayat_Obat (self,RO):
+        self.__Riwayat_Obat.del(RO)
 
-    def __str__(self):
-        return "ID_Dokter : {} \n  Diagnosa : {}\n Tanggal_Konsultasi : {}\n Riwayat_Obat : {}".format(self.ID_Dokter,self.Diagnosa,self.Tanggal_konsultasi,self.Riwayat_obat)
+    def getTgl_konsultasi (self):
+        return self.__Tanggal_konsultasi
+    def setTgl_Konsultasi (self):
+        self.__Tanggal_konsultasi = dt.strftime("%Y/%m/%d")
