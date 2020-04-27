@@ -9,7 +9,6 @@ engine = create_engine('sqlite:///Klinik.db', echo=True)
 
 Session = sessionmaker(bind=engine)
 
-
 def session():
     Base.metadata.create_all(engine)
     return session()
