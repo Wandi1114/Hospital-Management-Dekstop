@@ -22,8 +22,11 @@ class Poli:
     def setDaftar_Dokter(self, daftar):
         self.__Daftar_Dokter = daftar
 
-    def getJadwal_Dokter(self, jadwal):
+    def getJadwal_Dokter(self):
         return self.__Jadwal_Dokter
+    
+    def setJadwal_Dokter(self ,jadwal):
+        self.__Jadwal_Dokter = jadwal
 
 
 a = Poli()
