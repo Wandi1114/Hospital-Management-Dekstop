@@ -17,4 +17,4 @@ class Klinik(Base):
         self.Daftar_Dokter = Daftar_Dokter
 
 
-Base.metadata.create_all(engine)
+
