@@ -22,4 +22,16 @@ class ORMPasien(Base):
         session.add(self)
         session.commit()
         session.close()
+    
+    def delete_pasien(ID):
+        session = sessionFactory()
+        session.query(ORMPasien).filter_by(ID_Pasien=ID).delete()
+        session.commit()
+        session.close()
+    def update_pasien(ID):
+        pass
+    def view_pasien():
+        session = sessionFactory()
+        return session.query(ORMPasien).all()
+        session.close()
 modelFactory()
