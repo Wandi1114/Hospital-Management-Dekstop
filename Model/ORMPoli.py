@@ -5,14 +5,12 @@ from Model.base import sessionFactory, Base, modelFactory
 class ormPoli(Base):
     __tablename__ = "Daftar_Poli"
     id = Column(Integer, primary_key=True)
-    # nama_poli = Column(String)
-    # daftar_dokter = Column(String)
+    nama_poli = Column(String)
 
-    def __init__(self, ID, nama, daftar):
+    def __init__(self, ID, nama):
         session = sessionFactory()
         self.id = ID
-        # self.namaPoli = nama
-        # self.daftarDokter = daftar
+        self.namaPoli = nama
         session.add(self)
         session.commit()
         session.close()
@@ -28,7 +26,7 @@ class ormPoli(Base):
 
     def view_poli():
         session = sessionFactory()
-        return session.query(ormPoli), all()
+        return session.query(ormPoli).all()
         session.close()
 
 
