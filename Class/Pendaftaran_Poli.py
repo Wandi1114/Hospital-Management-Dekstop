@@ -39,6 +39,3 @@ class pendaftaran_poli:
 
 def __str__(self):
     return "waktu : {} \n  tanggal : {} \n keluhan : {}".format(self.waktu, self.tanggal, self.keluhan)
-
-
-print(pendaftaran_poli)
