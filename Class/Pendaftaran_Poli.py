@@ -1,29 +1,44 @@
-#from Pasiem import Pasien
-#from Poli import Poli
+from Class.Pasien import Pasien
+from Class.Poli import Poli
 import datetime
 dt = datetime.datetime.now()
 
 
 class pendaftaran_poli:
-    def __init__(self):
-        self.__waktu = ""
-        self.__tanggal = ""
-        self.__keluhan = ""
+    def __init__(self, wktu, tgl, klhn):
+        self.__waktu = wktu
+        self.__tanggal = tgl
+        self.__keluhan = klhn
 
-    def setWaktu(self):
-        self.__waktu = dt.strftime("%I:%M %p")
-
-    def getWaktu(self):
+    @property
+    def waktu(self):
+        waktu.dt.strftime("%I:%M %p")
         return self.__waktu
 
-    def setTanggal(self):
-        self.__tanggal = dt.strftime("%Y/%m/%d")
+    @waktu.setter
+    def setWaktu(self, wktu):
+        self.__waktu = wktu
 
-    def getTanggal(self):
+    @property
+    def tanggal(self):
+        tanggal.dt.strftime("%Y/%m/%d")
         return self.__tanggal
 
-    def setKeluhan(self, keluhan):
-        self.__keluhan = keluhan
+    @tanggal.setter
+    def tanggal(self, tgl):
+        self.__tanggal = tgl
 
-    def getKeluhan(self):
+    @property
+    def keluhan(self):
         return self.__keluhan
+
+    @keluhan.setter
+    def keluhan(self, klhn):
+        self.__keluhan = klhn
+
+
+def __str__(self):
+    return "waktu : {} \n  tanggal : {} \n keluhan : {}".format(self.waktu, self.tanggal, self.keluhan)
+
+
+print(pendaftaran_poli)
