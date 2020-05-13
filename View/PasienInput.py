@@ -1,10 +1,11 @@
 #berisi code code untuk percobaan untuk menunjang aplikasi
 # yang kemudian akan memanggil setiap class
 from Class.Pasien import Pasien
-from Model.base import sessionFactory,modelFactory
+#from Model.base import sessionFactory,modelFactory
 from PyQt5.QtGui import QIntValidator
-from PyQt5.QtWidgets import (QApplication,QMessageBox, QComboBox, QTextEdit, QFormLayout, QMainWindow, QWidget, QPushButton, QLabel, QLineEdit, QGridLayout, QMessageBox)
+from PyQt5.QtWidgets import (QApplication, QDateEdit,QMessageBox, QComboBox, QTextEdit, QFormLayout, QMainWindow, QWidget, QPushButton, QLabel, QLineEdit, QGridLayout)
 import sys
+ 
 
 class InputPasien(QWidget):
     def  __init__(self):
@@ -21,8 +22,8 @@ class InputPasien(QWidget):
         self.nama.setPlaceholderText("Nama Pasien")
         self.form.addRow("Nama Pasien", self.nama)
 
-        self.tglLahir = QLineEdit(self)
-        self.tglLahir.setInputMask("00/00/0000")
+        self.tglLahir = QDateEdit(self)
+        self.tglLahir.setCalendarPopup(True)
         self.form.addRow("Tanggal Lahir", self.tglLahir)
 
         self.Nik = QLineEdit(self)
@@ -45,33 +46,29 @@ class InputPasien(QWidget):
         self.form.addRow("Alamat", self.alamat)
 
         self.submit = QPushButton(self)
-        self.submit.setText("Tambah")
-        self.submit.clicked.connect(self.submit_btn)
-        self.form.addRow(self.submit)
+        self.submit.setText("Update")
+        self.submit.clicked.connect(self.update_btn)
 
         self.clear = QPushButton(self)
         self.clear.setText("Bersihkan")
         self.clear.clicked.connect(self.clear_btn)
 
-        self.cencel = QPushButton(self)
-        self.cencel.clicked.connect(self.cencel_btn)
-        self.cencel.setText("Batal")
-
-        self.form.addRow(self.clear,self.cencel)
+        self.form.addRow(self.clear,self.submit)
+        #self.form.addRow()
         
     def clear_btn(self):
         self.nama.clear()
         self.noTel.clear()
         self.alamat.clear()
-        self.jk.clear()
         self.Nik.clear()
         self.tglLahir.clear()
 
-    def cencel_btn(self):
-        sys.exit()
+    def update_btn(self):
+        pass
 
     def submit_btn(self):
         try:
+
             x = Pasien(self.nama.text(),
                         self.tglLahir.text(),
                         self.Nik.text(),
@@ -95,10 +92,9 @@ class InputPasien(QWidget):
             msg.setInformativeText(f"KESALAHAN : {e}")
             msg.setWindowTitle("Gagal")
             s = msg.exec_()
-            self.clear_btn()
         
 def addPasien():
-    app = QApplication(sys.argv)
+    app = QApplication([sys.argv])
     win = InputPasien()
     win.show()
     sys.exit(app.exec_())
