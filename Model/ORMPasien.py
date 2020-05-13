@@ -31,13 +31,22 @@ class ORMPasien(Base):
         session.commit()
         session.close()
 
-    def update_pasien(ID):
+    def update_pasien(ID,newNama,newTl,newNik,newAlmt,newJk,newNotel):
+        session = sessionFactory()
+        session.query(ORMPasien).filter_by(ID_Pasien=ID).update({
+                ORMPasien.namaPasien: newNama,
+                ORMPasien.Tanggal_Lahir: newTl,
+                ORMPasien.NIK: newNik,
+                ORMPasien.Alamat: newAlmt,
+                ORMPasien.JenisKelamin: newJk,
+            }, synchronize_session=False)
+        session.commit()
+        session.close()
         pass
 
     def view_pasien():
         session = sessionFactory()
         return session.query(ORMPasien).all()
         session.close()
-
 
 modelFactory()
