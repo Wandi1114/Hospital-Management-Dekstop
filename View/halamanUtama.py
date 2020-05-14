@@ -3,34 +3,21 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5 import QtCore
+from View.pasienCrud import TablePasien
 
 
-class utama:
+class utama(QMainWindow):
     def __init__(self):
-        super().__init__()
-        self.app = QApplication([])
-        self.mainWindow = QMainWindow()
-        self.mainWindow.setWindowTitle("Login")
-        self.mainWindow.setGeometry(360, 180, 683, 360)
-        self.mainWindow.setStyleSheet("background-color : #47F1A0")
+        super(utama,self).__init__()
+        self.setWindowTitle("Login")
+        self.setGeometry(360, 180, 680, 400)
+        #self.setStyleSheet("background-color : #47F1A0")
 
-        self.depan()
+        self.InitUI()
+        self.setCentralWidget(self.centralWidget)
 
-        self.mainWindow.show()
-        sys.exit(self.app.exec_())
-
-    def depan(self):
+    def InitUI(self):
         self.stylesheet = """
-        QWidget{
-            color: #fafafa;
-            font-family: 'Nunito';
-        }
-        QFrame{
-            background-color: #47F1A0;
-        }
-        QLabel#header{
-            font-family: 'Raleway';
-        }
         QPushButton{
             background-color: #f7f7f7;
             border: none;
@@ -41,7 +28,7 @@ class utama:
             background-color: #31b074;
         }
         """
-        self.centralWidget = QWidget(self.mainWindow)
+        self.centralWidget = QWidget(self)
         self.centralWidget.setObjectName("depanWidget")
         self.centralWidget.setFixedSize(683, 360)
         self.centralWidget.setStyleSheet(self.stylesheet)
@@ -73,27 +60,37 @@ class utama:
         self.teksKet = QLabel(
             "Silahkan pilih tampilan sesuai dengan kebutuhan! ^.^", self.frame)
         self.teksKet.setFont(font)
-        self.teksKet.setWordWrap(True)
+        #self.teksKet.setWordWrap(True)
         self.teksKet.setAlignment(Qt.AlignCenter)
         self.teksKet.setGeometry(160, 100, 355, 40)
 
         font.setPointSize(12)
         font.setWeight(2)
-        self.btnAdmin = QPushButton("Admin View", self.frame)
+        self.btnAdmin = QPushButton("Administrasi Pasien", self.frame)
         self.btnAdmin.setObjectName("btnAdmin")
         self.btnAdmin.setGeometry(100, 230, 100, 20)
         self.btnAdmin.resize(200, 45)
         self.btnAdmin.setFont(font)
+        self.btnAdmin.clicked.connect(self.crudPasien)
         self.btnAdmin.setCursor(QCursor(Qt.PointingHandCursor))
 
         font.setPointSize(12)
         font.setWeight(2)
-        self.btnDokter = QPushButton("Dokter View", self.frame)
+        self.btnDokter = QPushButton("Administrasi Dokter", self.frame)
         self.btnDokter.setObjectName("btnDokter")
         self.btnDokter.setGeometry(380, 230, 100, 20)
         self.btnDokter.resize(200, 45)
         self.btnDokter.setFont(font)
         self.btnDokter.setCursor(QCursor(Qt.PointingHandCursor))
 
+    def crudPasien(self):
+        self.windowAdmin = TablePasien()
+        self.setCentralWidget(self.windowAdmin)
+    def mainWindow(self):
+        self.setCentralWidget(self.centralWidget)
 
-utama()
+def main():
+    app = QApplication(sys.argv)
+    win = utama()
+    win.show()
+    sys.exit(app.exec_())
