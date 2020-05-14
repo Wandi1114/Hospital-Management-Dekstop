@@ -1,119 +1,96 @@
-#berisi code code untuk percobaan untuk menunjang aplikasi
-# yang kemudian akan memanggil setiap class
-#from Class.Pasien import Pasien
-#from Model.base import sessionFactory,modelFactory
-#from PyQt5.QtGui import QIntValidator
-from PyQt5.QtWidgets import (QApplication,QAbstractItemView,QMessageBox,QMainWindow, QWidget,QHBoxLayout, QPushButton,QTableWidget,QTableWidgetItem,QVBoxLayout)
-from PyQt5.QtCore import QDate
 import sys
-from Model.ORMPasien import ORMPasien
-from View.myWidget.PasienInput import InputPasien
+from PyQt5.QtWidgets import *
+from PyQt5.QtCore import *
+from PyQt5.QtGui import *
+from PyQt5 import QtCore
+from View.pasienCrud import TablePasien
 
-class TablePasien(QWidget):
-    def  __init__(self):
-        super(TablePasien,self).__init__()
+
+class utama(QMainWindow):
+    def __init__(self):
+        super(utama,self).__init__()
+        self.setWindowTitle("Login")
+        self.setGeometry(360, 180, 680, 400)
+        #self.setStyleSheet("background-color : #47F1A0")
+
         self.InitUI()
+        self.setCentralWidget(self.centralWidget)
 
     def InitUI(self):
-        self.setWindowTitle("Data Pasien")
-        self.setGeometry(200,200,900,500)
+        self.stylesheet = """
+        QPushButton{
+            background-color: #f7f7f7;
+            border: none;
+            border-radius: 4;
+            color: #333;
+        }
+        QPushButton::hover{
+            background-color: #31b074;
+        }
+        """
+        self.centralWidget = QWidget(self)
+        self.centralWidget.setObjectName("depanWidget")
+        self.centralWidget.setFixedSize(683, 360)
+        self.centralWidget.setStyleSheet(self.stylesheet)
 
-        self.create_table()
-        self.vbox = QVBoxLayout(self)
+        self.verticalLay = QVBoxLayout(self.centralWidget)
+        self.verticalLay.setObjectName("verticalLayout")
 
-        self.input_btn = QPushButton(self)
-        self.input_btn.setText("Tambah Pasien")
-        #self.input_btn.setFixedWidth(200)
-        self.input_btn.clicked.connect(self.addPasien)
+        self.frame = QFrame(self.centralWidget)
+        self.frame.setFixedSize(683, 360)
+        self.frame.setObjectName("frame")
+        self.frame.setLayoutDirection(Qt.LeftToRight)
 
-        self.close_btn = QPushButton(self)
-        self.close_btn.setText("Update")
-        self.close_btn.adjustSize()
-        self.close_btn.clicked.connect(self.updateTable)
+        self.vertical = QVBoxLayout(self.frame)
+        self.vertical.setObjectName("vLayout")
 
-        self.formInput = InputPasien()
-        self.formInput.setFixedSize(300,400)
+        font = QFont()
+        font.setPointSize(20)
+        font.setWeight(5)
+        font.setBold(True)
+        self.teksUtama = QLabel(
+            "Selamat Datang! di \n Aplikasi Klinik Sayang", self.frame)
+        self.teksUtama.setFont(font)
+        self.teksUtama.setWordWrap(True)
+        self.teksUtama.setAlignment(Qt.AlignCenter)
+        self.teksUtama.setGeometry(180, 10, 310, 65)
 
-        self.hbox = QHBoxLayout(self)
-        self.hbox.addWidget(self.table)
-        self.hbox.addWidget(self.formInput)
+        font.setPointSize(12)
+        font.setWeight(3)
+        self.teksKet = QLabel(
+            "Silahkan pilih tampilan sesuai dengan kebutuhan! ^.^", self.frame)
+        self.teksKet.setFont(font)
+        #self.teksKet.setWordWrap(True)
+        self.teksKet.setAlignment(Qt.AlignCenter)
+        self.teksKet.setGeometry(160, 100, 355, 40)
 
-        self.vbox.addLayout(self.hbox)
-        self.vbox.addWidget(self.input_btn)
-        self.vbox.addWidget(self.close_btn)
+        font.setPointSize(12)
+        font.setWeight(2)
+        self.btnAdmin = QPushButton("Administrasi Pasien", self.frame)
+        self.btnAdmin.setObjectName("btnAdmin")
+        self.btnAdmin.setGeometry(100, 230, 100, 20)
+        self.btnAdmin.resize(200, 45)
+        self.btnAdmin.setFont(font)
+        self.btnAdmin.clicked.connect(self.crudPasien)
+        self.btnAdmin.setCursor(QCursor(Qt.PointingHandCursor))
 
-        #self.container = QWidget(self)
-        #self.container.setLayout(self.vbox)
-        #self.container.adjustSize()
-        #self.setCentralWidget(self.container)
-        #self.setCentralLayout(self.vbox)
+        font.setPointSize(12)
+        font.setWeight(2)
+        self.btnDokter = QPushButton("Administrasi Dokter", self.frame)
+        self.btnDokter.setObjectName("btnDokter")
+        self.btnDokter.setGeometry(380, 230, 100, 20)
+        self.btnDokter.resize(200, 45)
+        self.btnDokter.setFont(font)
+        self.btnDokter.setCursor(QCursor(Qt.PointingHandCursor))
 
-    def updateTable(self):
-        self.formInput.update_btn()
-        self.isiTable()
-        self.formInput.clear()
+    def crudPasien(self):
+        self.windowAdmin = TablePasien()
+        self.setCentralWidget(self.windowAdmin)
+    def mainWindow(self):
+        self.setCentralWidget(self.centralWidget)
 
-    def addPasien(self):
-        self.formInput.submit_btn()
-        self.isiTable()
-        self.formInput.clear_btn()
-        #self.hbox.removeWidget(self.table)
-        #self.hbox.addWidget(self.table)
-
-    def fillForm(self,row):
-        print(self.table.item(row,0).text())#ID
-        print(self.table.item(row,1).text())#Nama
-        print(self.table.item(row,2).text())#TglLahir
-        print(self.table.item(row,3).text())#NIK
-        print(self.table.item(row,4).text())#Alamat
-        print(self.table.item(row,5).text())#JEnisKelamin
-        print(self.table.item(row,6).text())#Notelp
-
-
-        self.formInput.ID.setText(self.table.item(row,0).text())
-        self.formInput.nama.setText(str(self.table.item(row,1).text()))
-        self.formInput.Nik.setText((self.table.item(row,3).text()))
-        self.formInput.noTel.setText(self.table.item(row,6).text())
-
-        if str(self.table.item(row,5).text()) =='Wanita':
-            idx=1
-        else:
-            idx=0
-        self.formInput.jk.setCurrentIndex(idx)
-        self.formInput.alamat.setText(self.table.item(row,4).text())
-
-        a=self.table.item(row,2).text().split('/')
-        dd = int(a[0])
-        mm = int(a[1])
-        yy = int(a[2])
-        self.formInput.tglLahir.setDate(QDate(yy,mm,dd))
-        #print(f'{dd}/{mm}/{yy}')
-
-    def create_table(self):
-        self.table = QTableWidget(self)
-        self.table.cellClicked.connect(self.fillForm)
-        self.table.setColumnCount(7)
-        self.table.setHorizontalHeaderLabels(["ID","NAMA","Tanggal Lahir","NIK","Alamat","Jenis Kelamin","No. Telp."])
-        self.table.setFixedSize(741,350)
-        self.table.setEditTriggers(QAbstractItemView.NoEditTriggers)
-        self.isiTable()
-
-    def isiTable(self):
-        query = ORMPasien.view_pasien()
-        self.table.setRowCount(len(query))
-        for row in range(len(query)):
-            #self.table.insertRow(1)
-            self.table.setItem(row,0,QTableWidgetItem(query[row].ID_Pasien))
-            self.table.setItem(row,1,QTableWidgetItem(query[row].namaPasien))
-            self.table.setItem(row,2,QTableWidgetItem(query[row].Tanggal_Lahir))
-            self.table.setItem(row,3,QTableWidgetItem(query[row].NIK))
-            self.table.setItem(row,4,QTableWidgetItem(query[row].Alamat))
-            self.table.setItem(row,5,QTableWidgetItem(query[row].JenisKelamin))
-            self.table.setItem(row,6,QTableWidgetItem(query[row].noTelpPasien))
-         
-def crudPasien():
+def main():
     app = QApplication(sys.argv)
-    #app.setStyle('fusion')
-    win = TablePasien()
+    win = utama()
     win.show()
     sys.exit(app.exec_())
