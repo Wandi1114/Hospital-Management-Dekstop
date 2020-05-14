@@ -1,2 +1,2 @@
-from View.pasienCrud import crudPasien
-crudPasien()
+from View.halamanUtama import main
+main()
