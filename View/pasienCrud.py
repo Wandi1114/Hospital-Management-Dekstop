@@ -8,7 +8,9 @@ from PyQt5.QtCore import QDate
 import sys
 from Model.ORMPasien import ORMPasien
 from View.myWidget.PasienInput import InputPasien
-
+from PyQt5.QtGui import *
+from PyQt5.QtCore import *
+from PyQt5.QtWidgets import *
 class TablePasien(QWidget):
     def  __init__(self,parent=None):
         super(TablePasien,self).__init__(parent)
@@ -17,20 +19,38 @@ class TablePasien(QWidget):
         self.InitUI()
 
     def InitUI(self):
+        self.stylesheet = """
+        QPushButton{
+            background-color: #f7f7f7;
+			border: 0.5px solid #d1d1d1;
+            border-radius: 3;
+            color: #333;
+        }
+        QPushButton::hover{
+            background-color: #47F1A0;
+        }
+        """
+        self.setStyleSheet(self.stylesheet)
         self.setWindowTitle("Data Pasien")
         #self.setGeometry(200,200,900,500)
-
+        font = QFont()
         self.create_table()
         self.vbox = QVBoxLayout(self)
 
+        font.setPointSize(11)
+        font.setWeight(2)
         self.input_btn = QPushButton(self)
         self.input_btn.setText("Tambah Pasien")
+        self.input_btn.setFont(font)
+        self.input_btn.setFixedHeight(30)
         #self.input_btn.setFixedWidth(200)
         self.input_btn.clicked.connect(self.addPasien)
 
         self.close_btn = QPushButton(self)
         self.close_btn.setText("Update")
-        self.close_btn.adjustSize()
+        self.close_btn.setFont(font)
+        self.close_btn.setFixedHeight(30)
+        # self.close_btn.adjustSize()
         self.close_btn.clicked.connect(self.updateTable)
 
         self.formInput = InputPasien()
@@ -44,16 +64,20 @@ class TablePasien(QWidget):
         self.vbox.addWidget(self.input_btn)
         self.vbox.addWidget(self.close_btn)
 
+        font.setPointSize(8)
+        font.setWeight(1)
         self.back_btn = QPushButton(self)
         self.back_btn.clicked.connect(self.back)
         self.back_btn.setText("Kembali")
-        self.back_btn.adjustSize()
+        self.back_btn.setFont(font)
+        # self.back_btn.adjustSize()
         self.back_btn.move(20,5)
 
         self.Hal_ut = QPushButton(self)
         self.Hal_ut.clicked.connect(self.hal_utama)
         self.Hal_ut.setText("Halaman Utama")
-        self.Hal_ut.adjustSize()
+        self.Hal_ut.setFont(font)
+        # self.Hal_ut.adjustSize()
         self.Hal_ut.move(20,35)
 
         #self.container = QWidget(self)
