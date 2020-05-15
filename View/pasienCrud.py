@@ -18,7 +18,7 @@ class TablePasien(QWidget):
 
     def InitUI(self):
         self.setWindowTitle("Data Pasien")
-        self.setGeometry(200,200,900,500)
+        #self.setGeometry(200,200,900,500)
 
         self.create_table()
         self.vbox = QVBoxLayout(self)
@@ -46,9 +46,15 @@ class TablePasien(QWidget):
 
         self.back_btn = QPushButton(self)
         self.back_btn.clicked.connect(self.back)
-        self.back_btn.setText("Halaman Utama")
+        self.back_btn.setText("Kembali")
         self.back_btn.adjustSize()
         self.back_btn.move(20,5)
+
+        self.Hal_ut = QPushButton(self)
+        self.Hal_ut.clicked.connect(self.hal_utama)
+        self.Hal_ut.setText("Halaman Utama")
+        self.Hal_ut.adjustSize()
+        self.Hal_ut.move(20,35)
 
         #self.container = QWidget(self)
         #self.container.setLayout(self.vbox)
@@ -120,7 +126,10 @@ class TablePasien(QWidget):
             self.table.setItem(row,6,QTableWidgetItem(query[row].noTelpPasien))
 
     def back(self):
-        self.parent().mainWindow()
+        self.parent().adminPasien()
+
+    def hal_utama(self):
+        self.parent().halUt()
          
 def crudPasien():
     app = QApplication(sys.argv)
@@ -128,3 +137,4 @@ def crudPasien():
     win = TablePasien()
     win.show()
     sys.exit(app.exec_())
+
