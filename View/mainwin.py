@@ -8,7 +8,8 @@ class mainwin(QMainWindow):
 	def __init__(self):
 		super(mainwin,self).__init__()
 		self.setGeometry(200,100,1100,600)
-		self.setWindowTitle("Administrasi Rumah Sakit")
+		self.setWindowTitle("Administrasi Klinik")
+		self.setMaximumSize(1100,600)
 		#self.expand(False)
 		#self.InitUI()
 		
